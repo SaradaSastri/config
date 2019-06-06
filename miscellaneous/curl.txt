@@ -23,4 +23,27 @@ curl localhost:8888/foo/development/master
 /{application}-{profile}.properties
 /{label}/{application}-{profile}.properties
 
+#When there was not username password to the config-server
 curl localhost:8888/config-client/development
+curl localhost:8888/config-client/native
+
+#When the security.user.name/security.user.password was definied on the config-server bootstrap.properties
+curl -u root:s3cr3t localhost:8888/config-client/development
+   
+#Generating the keyStore which has the certs to encrypt and decript. The key is stored in bootstrap
+keytool -genkeypair -alias config-server-key -keyalg RSA -keysize 4096 -sigalg SHA512withRSA -dname "CN=Config Server,OU=Spring Cloud,O=Baeldung" -keypass my-k34-s3cr3t -keystore config-server.jks -storepass my-s70r3-s3cr3t
+	   
+encrypt.key-store.alias=config-server-key
+encrypt.key-store.location=classpath:/config-server.jks
+encrypt.key-store.secret=my-k34-s3cr3t
+encrypt.key-store.password=my-s70r3-s3cr3t
+
+#
+curl -X POST --data-urlencode d3v3L http://root:s3cr3t@localhost:8888/encrypt
+curl -u root:s3cr3t -X POST --data-urlencode d3v3L localhost:8888/encrypt
+
+
+http://appsdeveloperblog.com/spring-cloud-config-asymmetric-encryption-and-decryption/
+
+
+https://docs.spring.io/spring-security-kerberos/docs/1.0.2.BUILD-SNAPSHOT/reference/htmlsingle/
