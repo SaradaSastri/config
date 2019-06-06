@@ -47,3 +47,8 @@ http://appsdeveloperblog.com/spring-cloud-config-asymmetric-encryption-and-decry
 
 
 https://docs.spring.io/spring-security-kerberos/docs/1.0.2.BUILD-SNAPSHOT/reference/htmlsingle/
+
+
+
+https://github.com/marcellodesales/spring-mvc-with-spring-cloud-config-client-without-springboot
+
